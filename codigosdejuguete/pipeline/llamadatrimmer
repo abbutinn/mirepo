@@ -1,0 +1,30 @@
+# -*- coding: utf-8 -*-
+
+from optparse import OptionParser
+import glob
+import os
+import gzip
+import sys
+
+
+class ReadRecord:
+    def __init__(self,thread):
+        self.paired = False
+        self.thread = thread
+        self.samples = ()
+        self.sample2len = dict()
+        self.sample2phred = dict()
+
+    def read_design(self, design_file):
+        with open(design_file, 'r') as design_f:
+            lines = [line.rstrip().split("\t") for line in design_f]
+            if len(lines[0]) == 3:
+                self.paired = True
+            elif len(lines[0]) == 2:
+                self.paired = False
+            else:
+                print("Incorrect design format, please double check the file")
+            if self.paired :
+                if lines[0][2] != 'right':
+                    sys.exit("Please check the head of design files")
+            self.samples = lines[1:]
