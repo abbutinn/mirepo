@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+##llamada al docker de trimmomatic
+sudo docker run -t -v /home/usuario/Documentos/datostrimmo/:/datos comics/trimmomatic:0.36 java -jar /software/applications/Trimmomatic/0.36/trimmomatic-0.36.jar PE -trimlog /datos/outs/trimming.log /datos/reads/ERR550644_1.fastq /datos/reads/ERR550644_2.fastq /datos/outs/ERR550644_1p.fastq /datos/outs/ERR550644_1u.fastq /datos/outs/ERR550644_2p.fastq /datos/outs/ERR550644_2u.fastq ILLUMINACLIP:/software/applications/Trimmomatic/0.36/adapters/TruSeq3-PE.fa:2:30:10 LEADING:20 TRAILING:20 SLIDINGWINDOW:4:20 MINLEN:50 
